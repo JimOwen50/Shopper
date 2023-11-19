@@ -2,7 +2,7 @@
 
 {% block content%}
 {% load static %}
-
+{% load widget_tweaks %}
 
 
 
@@ -15,19 +15,18 @@
     <form method="post" autocomplete="off">
       {% csrf_token %}
    
-      <p>Name</p><p>{{form.name}}</p><br>
-      <p>Description</p><p>{{form.description}}</p><br>
-      <p>Category</p><p>{{form.category}}</p><br>
-      <p>Store name</p><p>{{form.retailer}}</p><br>
-      <p>Link to item in store</p><p>{{form.retailer_link}}</p><br>
-      <p>Qty (Enter 0 if gift card)</p><p>{{form.qty_asked_for}}</p>
-      <br>
+      <p>{% render_field form.name placeholder="Gift name" class+="form-control" %}</p>
+      <p>{% render_field form.description placeholder="Color, size, etc." class+="form-control" %}</p>
+      <p>{% render_field form.category placeholder="Gift category" class+="form-control" %}</p>
+      <p>{% render_field form.retailer placeholder="Where is it found?" class+="form-control" %}</p>
+      <p>{% render_field form.retailer_link placeholder="Link to gift?" class+="form-control" %}</p>
+      <p>{% render_field form.qty_asked_for placeholder="Quantity (enter 0 if gift card)" class+="form-control" %}</p>
       
-      <button type="submit" class="action_btn">Add</button>
-      <button type="reset" class="action_btn">Clear</button>
+      <button type="submit" class="btn">Add</button>
+      <button type="reset" class="btn">Clear</button>
+      <a href="/view-my-list" class="btn">Cancel</a>
     </form>
-    <br>
-    <div> <a href="/view-my-list"><button class="action_btn">Cancel</button></a></div>
+   
    
 
 

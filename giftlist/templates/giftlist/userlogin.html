@@ -2,6 +2,7 @@
 
 {% block content%}
 {% load static %}
+{% load widget_tweaks %}
 
 {% if form.errors %}
 <p>Your username and password didn't match. Please try again.</p>
@@ -13,7 +14,10 @@
 
         <form method="post" action="/userlogin/" class="container" >
             {% csrf_token %}
-            {{ form.as_div }}
+            <p>{% render_field form.username placeholder="Username" class+="form-control" %}</p>
+            <p>{% render_field form.password placeholder="Password" class+="form-control" %}</p>
+
+            <!-- {{ form.as_div }} -->
             <br>
             <button class="simple_btn" name="submit">Log In</button>
         </form>
