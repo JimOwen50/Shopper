@@ -1,0 +1,32 @@
+{% extends 'giftlist/base.html' %}
+
+{% block content%}
+{% load static %}
+
+<br>
+<h3 style="color:white;">{{person}}'s Profile</h3>
+
+<div class="container">
+
+
+    <br>
+
+    <form method="post" autocomplete="off">
+      {% csrf_token %}
+   
+      <p>Shirt size:</p><p>{{form.shirt_size}}</p><br>
+      <p>Pants size:</p><p>{{form.pants_size}}</p><br>
+      <p>Shoe size:</p><p>{{form.shoe_size}}</p><br>
+      <br>
+      
+      <button type="submit" class="action_btn">Save</button>
+      <button type="reset" class="action_btn">Clear</button>
+    </form>
+    <br>
+    <div> <a href="/view-my-list"><button class="action_btn">Cancel</button></a></div>
+   
+
+
+</div>
+
+{% endblock %}

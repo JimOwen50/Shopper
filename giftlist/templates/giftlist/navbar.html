@@ -1,0 +1,81 @@
+{% load static %}
+
+
+    <div class="navbar">
+        
+        <div class="logo">
+                <a href="/index">
+                    <img class="logo-img" src="{% static 'logo.png' %}" 
+                    style="height: 70px; width:auto; margin-bottom: 5px;">
+                </a>
+            <!-- </div> -->
+            <div class="app-title">
+                Shopping App
+            </div>
+        </div>
+        <div class="navlinks">
+            
+            <ul class="links">
+                {% if user.is_authenticated %}
+                    {% if person.is_shopper %}
+                        <li><a href="/view-family-list">Family List</a></li>
+                        <li><a href="/purchased-list">My Purchases</a></li>
+                    {% endif %}
+
+                    <li><a href="/view-my-list">My List</a></li>
+                    <!-- <li><a href="/view-my-profile">My Profile</a></li> -->
+                    <li><a href="/about">About</a></li>
+                    <form action="" method='post'>
+                        {% csrf_token %}
+                        <li><a class="action_btn" href="/user-logout"> Log Out</a></li>
+                    </form>
+                {% else %}
+                    <li><a href="/userlogin">Log In</a></li>
+                {% endif %}
+            </ul>
+        </div>
+            <div class="toggle_btn">
+                <i class="fa-solid fa-bars"></i>
+            </div>
+        </div>
+    </div>
+    <!-- <hr> -->
+
+    <div class="dropdown_menu">
+        {% if user.is_authenticated %}
+            <!-- <li><a href="home.html">Home</a></li> -->
+            {% if person.is_shopper %}
+                <li><a href="/view-family-list">Family List</a></li>
+                <li><a href="/purchased-list">My Purchases</a></li>
+            {% endif %}
+            <li><a href="/view-my-list">My List</a></li>
+            <!-- <li><a href="/view-my-profile">My Profile</a></li> -->
+            <li><a href="/about">About</a></li>
+            <form action="" method='post'>
+                {% csrf_token %}
+                <li><a class="action_btn" href="/user-logout"> Log Out</a></li>
+            </form>
+        {% else %}
+            <li><a href="/userlogin">Log In</a></li>
+        {% endif %}
+    </div>
+
+<script>
+    const toggleBtn = document.querySelector('.toggle_btn')
+    const toggleBtnIcon = document.querySelector('.toggle_btn i')
+    const dropDownMenu = document.querySelector('.dropdown_menu')
+
+    toggleBtn.onclick = function (){
+        dropDownMenu.classList.toggle('open')
+        const isOpen = dropDownMenu.classList.contains('open')
+
+        toggleBtnIcon.classList = isOpen
+        ? 'fa-solid fa-xmark'
+        : 'fa-solid fa-bars'
+    }
+</script>
+
+
+
+
+

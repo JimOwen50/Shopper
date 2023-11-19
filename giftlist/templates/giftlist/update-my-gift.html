@@ -1,0 +1,34 @@
+{% extends 'giftlist/base.html' %}
+
+{% block content%}
+{% load static %}
+
+<div class="container">
+
+    <!-- <h4> Enter Gift Details </h4>
+
+    <br> -->
+
+    <form method="post" autocomplete="off">
+      {% csrf_token %}
+   
+      <p>Name</p><p>{{form.name}}</p><br>
+      <p>Description</p><p>{{form.description}}</p><br>
+      <p>Category</p><p>{{form.category}}</p><br>
+      <p>Store name</p><p>{{form.retailer}}</p><br>
+      <p>Link to item in store</p><p>{{form.retailer_link}}</p><br>
+      <p>Qty (Enter 0 if gift card)</p><p>{{form.qty_asked_for}}</p>
+      <br>
+
+      <button type="submit" class="action_btn">Update</button>
+      <button type="reset" class="action_btn">Clear</button>
+    </form>
+    <br>
+    <div> <a href="/view-my-list"><button class="action_btn">Cancel</button></a></div>
+   
+
+
+</div>
+
+
+{% endblock %}

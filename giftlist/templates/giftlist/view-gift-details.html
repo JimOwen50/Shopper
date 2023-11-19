@@ -1,0 +1,53 @@
+{% extends 'giftlist/base.html' %}
+
+{% block content%}
+{% load static %}
+
+
+
+<div class="gift-container">
+    <p style="font-weight: 600; text-align: center;">Gift Details</p><br>
+    <p>{{gift.gift_for}} has asked for 
+    {% if gift.qty_asked_for %}        
+        {{gift.qty_asked_for}} 
+    {% else %}
+        any number of 
+    {% endif %}
+       <strong>{{gift.name}}</strong>.</p><br>
+    {% if gift.description %}
+        <p>{{gift.description}}.</p><br>
+    {% endif %}
+    {% if gift.retailer %}
+        <p>Suggested retailer is {{gift.retailer}}.</p><br>
+    {% endif %}
+    {% if gift.retailer_link %}
+        <p>A link was provided: <em><a style="color:crimson;" href={{gift.retailer_link}}>Click here</a></em></p>
+    {% endif %}
+    <br>
+    {% if gift.status == 'Available' or gift.qty_asked_for == 0 %}
+        {% if gift.qty_purchased %}
+            {% if gift.qty_purchased > 1 %}
+                <p> {{ gift.qty_purchased }} have been purchased.</p>
+            {% else %}
+                <p> {{ gift.qty_purchased }} has already been purchased.</p>
+            {% endif %}
+        {% else %}
+                <p>This gift has not been purchased yet.</p>
+        {% endif %}
+        <br>
+        {% if gift.qty_asked_for == 0 and gift.qty_purchased > 0 %}
+            <a class="btn" style="align-self: center;" href="/purchase-gift/{{gift.id}}">I purchased one too!</a>
+        {% else %}
+            <a class="btn" style="align-self: center;" href="/purchase-gift/{{gift.id}}">I purchased it!</a>
+        {% endif %}
+    {% else %}
+        <p> This item has been purchased by {{gift.purchased_by}}.</p>
+    {% endif %}
+
+    <br>
+    <a class="action_btn" style="align-self: center;" href="/view-family-list">Back to Gift List</a>
+</div>
+
+
+
+{% endblock %}

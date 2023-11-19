@@ -1,0 +1,63 @@
+{% extends 'giftlist/base.html' %}
+
+{% block content%}
+{% load static %}
+
+<br>
+<h3 style="color:white;">Family shopping list for Christmas</h3>
+<div class="card-body">
+    <div style="overflow-x:auto;">
+        <!-- Greet the user, showing his/her name -->
+        <h3 class="greeting"> {{user.get_username}}, you can sort the gift list by:</h3>
+        <div class="viewsort">
+            <button class="simple_btn"><a href="/view-sortby-person">Gift For</a></button>
+            <button class="simple_btn"><a href="/view-sortby-category">Category</a></button>
+            <button class="simple_btn"><a href="/view-sortby-status">Status</a></button>
+        </div>
+        <table class="gift-list-table">
+            <tr>
+                <th id="gfthdr1">For</th>
+                <th id="gfthdr2">Category</th>
+                <th id="gfthdr2">Gift</th>
+                <th id="gfthdr3">Status</th>
+            </tr>
+            {% for gift in gifts %}
+                    <tr id="gifts">
+                        <!-- Don't show user's gifts when showing list -->
+                        {% if gift.gift_for != person %}
+                            {% if gift.status == "Available" or gift.qty_asked_for == 0 %}
+                                <td id="name">{{gift.gift_for}}</td>
+                                <td id="cat">{{gift.category}}</td>
+                                <td id="desc"><a href="/view-gift-details/{{gift.id}}">{{gift.name}}</a></td>
+                                <td id="qty">Available</td>
+                            {% else %}                                    
+                                <td id="name" 
+                                    style="text-decoration: line-through;
+                                            color: gray;
+                                            background-color:lightgray;">
+                                    {{gift.gift_for}}</td>
+                                <td id="cat" 
+                                    style="text-decoration: line-through;
+                                            color: gray;
+                                            background-color:lightgray;"">
+                                    {{gift.category}}</td>
+                                <td id="desc" 
+                                    style="text-decoration: line-through;
+                                            color: gray;
+                                            background-color:lightgray;">
+                                            <a href="/view-gift-details/{{gift.id}}">{{gift.name}}</a></td>
+                                <td id="qty" 
+                                    style=" color: gray;
+                                            background-color:lightgray;">
+                                    Purchased</td>
+                            {% endif %}
+                        {% endif %}
+                    </tr>
+
+            {% endfor %}
+        </table>
+    </div>
+</div>
+
+
+{% endblock %}

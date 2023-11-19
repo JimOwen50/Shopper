@@ -1,0 +1,33 @@
+{% extends 'giftlist/base.html' %}
+
+{% block content%}
+{% load static %}
+
+<br>
+<h3 style="color:white;">My Wishlist for Christmas</h3><br>
+
+<a href="/add-gift" class="action_btn">Add a Gift</a>
+<div class="card-body">
+    <div style="overflow-x:auto;">        
+        <table class="gift-list-table">
+            <h2 class="greeting"> {{user.get_username}}, this is what's on your list so far:</h2>
+            <tr>
+                <th id="gfthdr1">Name</th>
+                <th id="gfthdr2">Description</th>
+                <th id="gfthdr3">Qty</th>
+            </tr>
+            {% for gift in gifts %}
+                {% if gift.gift_for == person %}
+                        <tr id="gifts">
+                        <td id="name"><a href="/update-my-gift/{{gift.id}}"  style="color: green";>{{gift.name}}</a></td>
+                        <td id="desc">{{gift.description}}</td>
+                        <td id="qty">{{gift.qty_asked_for}}</td>
+                    </tr>
+                {% endif %}
+            {% endfor %}
+        </table>
+    </div>
+</div> <br>
+
+
+{% endblock %}

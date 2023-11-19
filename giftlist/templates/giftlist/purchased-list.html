@@ -1,0 +1,66 @@
+{% extends 'giftlist/base.html' %}
+
+{% block content%}
+{% load static %}
+
+<br>
+<h3 style="color:white;">Gifts that I have purchased</h3><br>
+<a href="/view-family-list" class="action_btn">Back to List</a>
+<div class="card-body">
+    <div style="overflow-x:auto;">        
+        <table class="gift-list-table">
+            <h2 class="greeting"> {{user.get_username}}, this is what you have purchased so far:</h2>
+            <tr>
+                <th id="gfthdr1">For</th>
+                <th id="gfthdr2">Gift</th>
+                <th id="gfthdr3">Qty</th>
+                <th id="gfthdr3">Price</th>
+            </tr>
+
+
+            <!-- {% for gift_for,gift_for__data in gift_for.items %}
+            <p>{{ gift_for }}
+                {% for buyer in gift_for__data.buyers %}
+                <ul>
+                    <li>{{ buyer.qty }}</li>
+                    <li>{{ buyer.descr }}</li>
+                    <li>{{ buyer.price }}</li>
+                </ul>
+                {% endfor %}
+                Subtotal: {{ gift_for__data.subtotal }}
+            </p>
+            {% endfor %} -->
+            <!-- <p>Total: {{total}}</p> -->
+
+            
+
+
+
+
+
+
+
+
+
+            {% for gift in gifts %}
+                {% if gift.purchased_by == person %}
+                    <tr> 
+                        <td id="member">{{gift.gift_for}}</td>
+                        <td id="name">{{gift.name}}</td>
+                        <td id="desc">{{gift.qty_purchased}}</td>
+                        <td id="price">${{gift.price}}</td>
+                    </tr>
+                {% endif %}
+            {% endfor %}
+            <tr>
+                <td></td>
+                <td><em>Here's your running total !</em></td>
+                <td>Total</td>
+                <td id="gifttot">${{gift_total}}</td>
+            </tr>
+        </table>
+    </div>
+</div> <br>
+
+
+{% endblock %}

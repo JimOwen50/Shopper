@@ -1,0 +1,29 @@
+{% extends 'giftlist/base.html' %}
+
+{% block content%}
+{% load static %}
+
+<h4>Purchase a Gift</h4>
+
+<div class="container">
+
+
+    <form method="post" autocomplete="off">
+        {% csrf_token %}
+        <p>Gift is for {{gift.gift_for}}</p><br>
+     
+        <p>Store: {{gift.retailer}}</p><br>
+        <p>Qty Purchased: {{gift.qty_purchased}}</p><br>
+        <p>Price: {{gift.price}}</p>
+        <!-- <p>Purchased by: {{gift.purchased_by}}</p> -->
+
+        <br>
+        
+        <button type="submit" class="action_btn">Save</button>
+        <button type="reset" class="action_btn">Clear</button>
+      </form>
+  
+</div>
+
+
+{% endblock %}
